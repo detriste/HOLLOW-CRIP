@@ -18,7 +18,7 @@ function drawDet(cnt){if(!DV)return;const k=DV[0],id=DV[1],it=k=='i'?IT[id]:ACC[
  if(n>1)wrapT('Você tem '+n+' cópias: o efeito foi aplicado '+n+' vezes e se acumula.',210,y+10,540,22,14,'#8fb0a0');
  txt('Clique ou ESC para fechar',480,484,12,'#9a8f7c')}
 
-function drawInv(){X.setTransform(1,0,0,1,0,0);X.fillStyle='#000c';X.fillRect(0,0,W,H);X.fillStyle='#1a1612';X.strokeStyle='#5a4a35';X.lineWidth=3;X.beginPath();X.roundRect(50,36,860,528,10);X.fill();X.stroke();
+function drawInv(){base();X.fillStyle='#000c';X.fillRect(0,0,W,H);X.fillStyle='#1a1612';X.strokeStyle='#5a4a35';X.lineWidth=3;X.beginPath();X.roundRect(50,36,860,528,10);X.fill();X.stroke();
  const h=P.ch,s=P.s;txt('Inventário',480,76,26,'#d8cbb0');body(h,175,140,30,Math.sin(tm*1.2)*.8,0,tm);txt(h.n,175,200,18,h.c);h.d.forEach((l,i)=>txt(l,175,224+i*16,11,i?'#a89d88':h.c));icon('q',h.k,175,273,20);
  [['Vida',P.hp/2+' / '+P.max/2],['Dano',s.dmg.toFixed(1)],['Cadência',s.rate.toFixed(1)+'/s'],['Velocidade',s.spd|0],['Alcance',(s.range*100|0)+'%'],['Tiros por disparo',s.multi],['Perfuração',s.pierce],['Ricochetes',s.bounce],['Recarga da habilidade',(h.cd*s.acd).toFixed(1)+'s'],['Poder da habilidade','×'+s.apw.toFixed(1)]].forEach(([l,v],i)=>{txt(l,80,296+i*24,13,'#9a8f7c','left');txt(v,270,296+i*24,13,'#e6dcc6','right')});
  const cnt={};P.items.forEach(i=>cnt[i]=(cnt[i]||0)+1);const ks=Object.keys(cnt);

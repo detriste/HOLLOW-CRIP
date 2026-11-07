@@ -4,7 +4,7 @@ function pp(k,v){const o=HU[k]||(HU[k]={v,t:0});if(o.v!=v){o.v=v;o.t=.35}o.t-=DT
 function heart(x,y,v,s,col){X.save();X.translate(x,y);X.scale(s,s);X.lineWidth=2.5;X.strokeStyle='#1c130d';X.lineJoin='round';const p=()=>{X.beginPath();X.moveTo(0,10);X.bezierCurveTo(-16,-2,-10,-14,0,-6);X.bezierCurveTo(10,-14,16,-2,0,10);X.closePath()};
  p();X.fillStyle='#3b2a25';X.fill();if(v>0){X.save();p();X.clip();X.fillStyle=col||'#b5342f';X.fillRect(-20,-20,v>1?40:20,40);X.restore()}p();X.stroke();X.restore()}
 
-function drawHUD(){X.setTransform(1,0,0,1,0,0);const h=P.ch,c=h.c,lo=P.hp<=2;C.style.cursor=st=='play'&&M.a?'none':'default';
+function drawHUD(){base();const h=P.ch,c=h.c,lo=P.hp<=2;C.style.cursor=st=='play'&&M.a?'none':'default';
  const lg=X.createRadialGradient(P.x,P.y,90,P.x,P.y,450);lg.addColorStop(0,'rgba(8,6,4,0)');lg.addColorStop(1,'rgba(8,6,4,.7)');X.fillStyle=lg;X.fillRect(0,0,W,H);
  if(P.inv>.8){X.fillStyle='rgba(150,20,10,'+(P.inv-.8)*.9+')';X.fillRect(0,0,W,H)}
  if(P.poi>0){X.fillStyle='rgba(90,170,40,.10)';X.fillRect(0,0,W,H);txt('ENVENENADO '+P.poi.toFixed(1)+'s',62,72,11,'#8fd04a','left')}
@@ -20,7 +20,7 @@ function drawHUD(){X.setTransform(1,0,0,1,0,0);const h=P.ch,c=h.c,lo=P.hp<=2;C.s
  if(cb>1){const pu=1+Math.max(0,ct-2.8)*1.5;X.save();X.translate(480,32);X.scale(pu,pu);txt('COMBO ×'+cb,0,0,18+Math.min(cb,10),'#b04a32');X.restore();X.fillStyle='#b04a32';X.fillRect(420,40,120*ct/3,3)}
  if(M.a&&st=='play'){X.strokeStyle=c;X.lineWidth=2;X.beginPath();X.arc(M.x,M.y,9,0,6.283);X.moveTo(M.x-16,M.y);X.lineTo(M.x-5,M.y);X.moveTo(M.x+5,M.y);X.lineTo(M.x+16,M.y);X.moveTo(M.x,M.y-16);X.lineTo(M.x,M.y-5);X.moveTo(M.x,M.y+5);X.lineTo(M.x,M.y+16);X.stroke()}}
 
-function drawMap(){X.setTransform(1,0,0,1,0,0);X.fillStyle='#000d';X.fillRect(0,0,W,H);txt('Mapa — '+FN[fl-1],480,64,24,'#d8cbb0');
+function drawMap(){base();X.fillStyle='#000d';X.fillRect(0,0,W,H);txt('Mapa — '+FN[fl-1],480,64,24,'#d8cbb0');
  for(const r of Object.values(G)){const vs=r.vis,adj=doors(r).some(d=>d.r.vis);if((!vs&&!adj)||(r.sec&&!r.rev))continue;const x=480+(r.x-3)*76-30,y=310+(r.y-3)*54-20;
   for(const d of doors(r)){if(d.a>0){X.fillStyle='#4a4032';X.fillRect(x+60,y+16,16,8)}if(d.b>0){X.fillStyle='#4a4032';X.fillRect(x+26,y+40,8,14)}}
   X.fillStyle=!vs?'#ffffff22':rc(r);X.strokeStyle=r==room?'#fff':'#1c130d';X.lineWidth=r==room?4:2;X.fillRect(x,y,60,40);X.strokeRect(x,y,60,40);

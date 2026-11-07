@@ -1,8 +1,8 @@
 /* Desenho completo de cada quadro */
-function draw(){X.save();X.fillStyle='#0d0b09';X.fillRect(0,0,W,H);
+function draw(){base();X.save();X.fillStyle='#0d0b09';X.fillRect(0,0,W,H);
  if(st=='select'){drawSel();X.restore();return}if(st=='settings'){drawSettings();X.restore();return}
  if(st=='menu'){txt('CRIPTA DO VAZIO',480,230+Math.sin(performance.now()/700)*4,60,'#a8452f');txt('um roguelike de cripta, lama e brasa — 4 heróis, 3 andares, '+(IT.length-4)+' itens, '+ACC.length+' acessórios',480,275,16,'#9a8f7c');
-  txt(mvTxt()+' mover  •  MOUSE mira, clique atira (ou '+shTxt()+')  •  '+kn('dash').toUpperCase()+' dash',480,345,15);txt(kn('ability')+' habilidade  •  '+kn('bomb')+' ou botão direito bomba  •  '+kn('inv')+' inventário  •  '+kn('map')+' mapa  •  '+kn('restart')+' reiniciar',480,370,15);txt('Lava queima • água e lama retardam • gelo escorrega',480,395,13,'#9a8f7c');txt('Pressione ENTER ou clique para escolher o herói',480,430,20,'#a8452f');settingsBtn(360,462,240,42,'⚙ Configurar teclas (F1)');X.restore();return}
+  txt(mvTxt()+' mover  •  MOUSE mira, clique atira (ou '+shTxt()+')  •  '+kn('dash').toUpperCase()+' dash',480,345,15);txt(kn('ability')+' habilidade  •  '+knAll('bomb')+' bomba  •  '+kn('inv')+' inventário  •  '+kn('map')+' mapa  •  '+kn('restart')+' reiniciar',480,370,15);txt('Lava queima • água e lama retardam • gelo escorrega',480,395,13,'#9a8f7c');txt('Pressione ENTER ou clique para escolher o herói',480,430,20,'#a8452f');settingsBtn(360,462,240,42,'⚙ Configurar teclas (F1)');X.restore();return}
  if(shake>.5)X.translate(rnd(-shake,shake)/2,rnd(-shake,shake)/2);
  const bi=BI[fl-1]||BI[0];X.fillStyle=bi.w;X.fillRect(0,0,W,H);
  for(let i=0;i<14;i++)for(let j=0;j<8;j++){const h=(i*73856093^j*19349663^(room.x||0)*83492791^(room.y||0)*2654435)>>>0,x=L+i*TS,y=U+j*TS;X.fillStyle=bi.f[h%3];X.fillRect(x,y,TS,TS);X.strokeStyle='#0003';X.lineWidth=1;X.strokeRect(x+.5,y+.5,TS-1,TS-1);if(h%7==0){X.fillStyle=bi.d;X.fillRect(x+(h>>3)%40+6,y+(h>>5)%40+6,7,3)}}

@@ -1,4 +1,4 @@
 :root{color-scheme:dark;--bg:#0d0b09;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html,body{margin:0;height:100%;background:var(--bg)}
 body{display:flex;align-items:center;justify-content:center}
-canvas{width:min(100vw,calc((100vh - 4px)*1.6));display:block;background:var(--bg);touch-action:none}
+canvas{width:min(100vw,calc((100vh - 4px)*1.6));aspect-ratio:8/5;height:auto;display:block;background:var(--bg);touch-action:none}

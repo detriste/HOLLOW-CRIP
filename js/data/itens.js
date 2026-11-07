@@ -36,7 +36,7 @@ const DET=[
 'Aumenta a vida máxima em 2 corações e cura tudo, além de +1,5 de dano e +30 de velocidade. Item raro, dado apenas pelo Guardião do Tesouro.',
 'Tiros teleguiados, perfurantes (+2) e explosivos, além de +1 de dano. Reúne três efeitos fortes em um só item. Item raro do Guardião do Tesouro.',
 'Dá +2,5 de dano e dobra sua habilidade (Q): poder +0,8 e recarga pela metade. Item raro do Guardião do Tesouro.',
-'Bombas infinitas (E ou botão direito, recarga de 0,9s) que não machucam você; dano reduzido em chefes. Efeito por classe. Sentinela: empurra inimigos, apaga projéteis e protege 0,7s. Espectro: raio maior, ativa a Fase Etérea por 1,2s e zera o dash. Artilheiro: solta um anel de 16 tiros. Necromante: cura meio coração se acertar e solta 8 tiros teleguiados. Recompensa por derrotar os 2 chefes do Totem.'],
+'Bombas infinitas (tecla configurável — padrão E ou botão direito, recarga de 0,9s) que não machucam você; dano reduzido em chefes. Efeito por classe. Sentinela: empurra inimigos, apaga projéteis e protege 0,7s. Espectro: raio maior, ativa a Fase Etérea por 1,2s e zera o dash. Artilheiro: solta um anel de 16 tiros. Necromante: cura meio coração se acertar e solta 8 tiros teleguiados. Recompensa por derrotar os 2 chefes do Totem.'],
 ADT=[
 'Quando um inimigo morre, a chance de largar um pickup sobe 40% (de 50% para 70% nos inimigos normais).',
 'Aumenta o dano de todos os seus tiros em 20%.',
