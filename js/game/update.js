@@ -922,6 +922,10 @@ function update(dt){
     // CHEFE
     // =====================================================
 
+    else if(e.t=='boss'&&e.bt==5){
+      thiefAI(e,dt,a,d);
+    }
+
     else if(e.t=='boss'){
 
       const ph=e.hp/e.mhp>.66?0:e.hp/e.mhp>.33?1:2;
