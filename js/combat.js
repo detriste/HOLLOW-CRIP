@@ -30,7 +30,7 @@ function boom(x,y,rad,dmg,rocks,ns){shake=rocks?18:6;parts(x,y,'#d9923f',rocks?4
 
 let AB=0;
 
-function hurt(e,d,ab){if(e.t=='wraith'&&e.s)return;ab=ab||AB;if(ab&&e.t=='boss'){if(e.abi!=P.aid){e.abi=P.aid;e.abd=0}d=Math.min(d,Math.max(0,e.mhp*.25-e.abd));e.abd+=d}e.hp-=d;e.fl=.08}
+function hurt(e,d,ab){if((e.t=='wraith'&&e.s)||e.gh>0)return;ab=ab||AB;if(ab&&e.t=='boss'){if(e.abi!=P.aid){e.abi=P.aid;e.abd=0}d=Math.min(d,Math.max(0,e.mhp*.25-e.abd));e.abd+=d}e.hp-=d;e.fl=.08}
 
 function kill(e){kills++;cb++;ct=3;if(e.t=='boss'&&!e.sm){P.bk=(P.bk||0)+1;if(P.bk%2==0){pk.push({t:'s',x:cl(e.x,L+40,RT-40),y:cl(e.y,U+40,BT-40),pr:0});ban={t:3,s:'Um Totem de Invocação caiu!'}}}
  if(P.ch.k==1&&e.t!='mini'){P.sk=(P.sk||0)+1;if(P.sk>=10){if(Math.ceil(P.sl.length/2)<3){P.sl.push('a','a');P.sk=0;ban={t:2.5,s:'Coração azul conquistado!'};sfx(900,.2,.05,'triangle');parts(P.x,P.y,'#7fa6c4',16,200)}else P.sk=10}}P.ac=Math.max(0,P.ac-.7);hs=e.t=='boss'?.25:.04;shake+=e.t=='boss'?20:2;parts(e.x,e.y,e.c,e.t=='boss'?80:16,e.t=='boss'?500:250);sfx(200,.12,.05,'triangle');

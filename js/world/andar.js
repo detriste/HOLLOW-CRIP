@@ -23,7 +23,7 @@ function initRoom(r){r.init=1;r.rocks=[];r.en=[];r.pk=[];r.cleared=true;
  if(r.t=='n'||r.t=='boss')genTerr(r);
  if(r.t=='n'){r.cleared=false;const pl=[['drone','turret','blob','bat','sapper'],['charger','spin','sniper','healer','turret','blob','sapper','brute','bat'],['mage','sniper','charger','spin','healer','wraith','wraith','brute','turret']][fl-1];
   const n=ri(2,3)+fl+(fl>1?1:0);for(let i=0;i<n;i++){let x,y,k=0;do{x=rnd(L+60,RT-60);y=rnd(U+60,BT-60);k++}while(k<30&&(hy(x-P.x,y-P.y)<230||r.tm[tk(Math.floor((x-L)/TS),Math.floor((y-U)/TS))]=='l'||r.rocks.some(o=>Math.abs(x-(L+o.x*TS+30))<45&&Math.abs(y-(U+o.y*TS+30))<45)));const m=mk(pick(pl),x,y);if(Math.random()<.13+.03*fl)elite(m);r.en.push(m);if(m.t=='bat')for(let j=1;j<3;j++)r.en.push(mk('bat',x+j*22,y+j*10))}}
- if(r.t=='boss'){r.cleared=false;const b=mk('boss',480,200),i=pick([[0,1],[2,3],[4,3,2]][fl-1]);b.bt=i;b.c=BN[i][1];b.nm=BN[i][0];if(i==2)b.sp*=1.5;r.en.push(b);ban={t:2.5,s:b.nm}}
+ if(r.t=='boss'){r.cleared=false;const b=mk('boss',480,200),i=pick([[0,1],[2,3,5],[4,3,2,5]][fl-1]);b.bt=i;b.c=BN[i][1];b.nm=BN[i][0];if(i==2)b.sp*=1.5;r.en.push(b);ban={t:2.5,s:b.nm}}
  if(r.t=='treasure'){if(Math.random()<.17){r.cleared=false;r.tb=1;const b=mk('boss',480,200);b.bt=ri(0,4);b.c='#d4a93a';b.nm='Guardião do Tesouro';b.hp=b.mhp=b.hp*1.6;b.sp*=1.25;b.tb=1;r.en.push(b);ban={t:2.5,s:b.nm}}else r.pk.push({t:'i',id:take(),x:480,y:300,pr:0})}
  if(r.t=='devil')r.pk.push({t:'i',id:take(),x:400,y:300,pr:0,ph:2},{t:'i',id:take(),x:560,y:300,pr:0,ph:2});
  if(r.t=='angel')r.pk.push({t:'i',id:take(),x:400,y:300,pr:0,g:1},{t:'i',id:take(),x:560,y:300,pr:0,g:1});

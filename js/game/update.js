@@ -497,7 +497,7 @@ function update(dt){
         if(
           b.l>0&&
           !(e.w>0)&&
-          !(e.t=='wraith'&&e.s)&&
+          !(e.t=='wraith'&&e.s)&&!(e.gh>0)&&
           !b.hs.includes(e)&&
           hy(b.x-e.x,b.y-e.y)<b.r+e.r
         ){
