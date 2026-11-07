@@ -1,0 +1,36 @@
+/* Geração de andares e salas, portas, terreno e navegação entre salas */
+function bossRooms(r){const c=D4.map(([a,b])=>[r.x+a,r.y+b]).filter(([x,y])=>x>=0&&y>=0&&x<7&&y<7&&!G[x+','+y]);let f=c.filter(([x,y])=>D4.filter(([a,b])=>G[(x+a)+','+(y+b)]).length==1);if(!f.length)f=c;
+ const add=t=>{if(!f.length)return;const[x,y]=f.splice(ri(0,f.length-1),1)[0];G[x+','+y]={x,y,t}};add('shop');const q=Math.random();if(q<.25)add('devil');else if(q<.4)add('angel');ban={t:3,s:'Novas portas se abriram'}}
+
+function genTerr(r){r.tm={};const n=ri(0,3)+(fl>1?1:0);for(let b=0;b<n;b++){const t=pick(TB[fl-1]),m=ri(3,9);let x=ri(1,12),y=ri(1,6);for(let i=0;i<m;i++){if(x>=0&&x<14&&y>=0&&y<8&&!safe(x,y)&&!r.rocks.some(o=>o.x==x&&o.y==y))r.tm[tk(x,y)]=t;const[d,e]=pick(D4);x+=d;y+=e}}}
+
+function newFloor(){G=genFloor();goRoom(G['3,3'],null);ban={t:3.5,s:'Andar '+fl+' — '+FN[fl-1]}}
+
+const nb=(r,a,b)=>G[(r.x+a)+','+(r.y+b)],dd=r=>Math.abs(r.x-3)+Math.abs(r.y-3);
+
+function genFloor(){const g={'3,3':{x:3,y:3,t:'start'}},cells=[[3,3]],n=7+fl*2+ri(0,2);G=g;
+ while(cells.length<n){const[cx,cy]=pick(cells),[dx,dy]=pick(D4),x=cx+dx,y=cy+dy;if(x<0||y<0||x>6||y>6||g[x+','+y])continue;
+  let k=0;for(const[a,b]of D4)if(g[(x+a)+','+(y+b)])k++;if(k>1&&Math.random()<.75)continue;g[x+','+y]={x,y,t:'n'};cells.push([x,y])}
+ const sc=r=>(D4.filter(([a,b])=>nb(r,a,b)).length==1?100:0)+dd(r)+Math.random();
+ const c=Object.values(g).filter(r=>r.t=='n').sort((a,b)=>sc(b)-sc(a));
+ c[0].t='boss';c[1].t='treasure';c[1].locked=true;c[2].t='shop';const e=[];for(let x=0;x<7;x++)for(let y=0;y<7;y++)if(!g[x+','+y]){const k=D4.filter(([a,b])=>g[(x+a)+','+(y+b)]).length;if(k)e.push([x,y,k])}e.sort((a,b)=>b[2]-a[2]||Math.random()-.5);if(e.length)g[e[0][0]+','+e[0][1]]={x:e[0][0],y:e[0][1],t:'secret',sec:1};return g}
+
+function doors(r){return D4.map(([a,b])=>({a,b,r:nb(r,a,b)})).filter(d=>d.r&&(!d.r.sec||d.r.rev))}
+
+function initRoom(r){r.init=1;r.rocks=[];r.en=[];r.pk=[];r.cleared=true;
+ if(r.t=='n'||r.t=='boss'){const ly=r.t=='n'?ri(0,4):0,q=ly?0:r.t=='n'?ri(4,9):2;if(ly)LY[ly-1].split(' ').forEach((w,y)=>[...w].forEach((c,x)=>{if(c=='#')r.rocks.push({x,y})}));for(let i=0;i<q;i++){const tx=ri(0,13),ty=ri(0,7);
+  if((tx>=5&&tx<=8&&ty>=2&&ty<=5)||(tx>=6&&tx<=7&&(ty<2||ty>5))||(ty>=3&&ty<=4&&(tx<2||tx>11)))continue;r.rocks.push({x:tx,y:ty})}}
+ if(r.t=='n'||r.t=='boss')genTerr(r);
+ if(r.t=='n'){r.cleared=false;const pl=[['drone','turret','blob','bat','sapper'],['charger','spin','sniper','healer','turret','blob','sapper','brute','bat'],['mage','sniper','charger','spin','healer','wraith','wraith','brute','turret']][fl-1];
+  const n=ri(2,3)+fl+(fl>1?1:0);for(let i=0;i<n;i++){let x,y,k=0;do{x=rnd(L+60,RT-60);y=rnd(U+60,BT-60);k++}while(k<30&&(hy(x-P.x,y-P.y)<230||r.tm[tk(Math.floor((x-L)/TS),Math.floor((y-U)/TS))]=='l'||r.rocks.some(o=>Math.abs(x-(L+o.x*TS+30))<45&&Math.abs(y-(U+o.y*TS+30))<45)));const m=mk(pick(pl),x,y);if(Math.random()<.13+.03*fl)elite(m);r.en.push(m);if(m.t=='bat')for(let j=1;j<3;j++)r.en.push(mk('bat',x+j*22,y+j*10))}}
+ if(r.t=='boss'){r.cleared=false;const b=mk('boss',480,200),i=pick([[0,1],[2,3],[4,3,2]][fl-1]);b.bt=i;b.c=BN[i][1];b.nm=BN[i][0];if(i==2)b.sp*=1.5;r.en.push(b);ban={t:2.5,s:b.nm}}
+ if(r.t=='treasure'){if(Math.random()<.17){r.cleared=false;r.tb=1;const b=mk('boss',480,200);b.bt=ri(0,4);b.c='#d4a93a';b.nm='Guardião do Tesouro';b.hp=b.mhp=b.hp*1.6;b.sp*=1.25;b.tb=1;r.en.push(b);ban={t:2.5,s:b.nm}}else r.pk.push({t:'i',id:take(),x:480,y:300,pr:0})}
+ if(r.t=='devil')r.pk.push({t:'i',id:take(),x:400,y:300,pr:0,ph:2},{t:'i',id:take(),x:560,y:300,pr:0,ph:2});
+ if(r.t=='angel')r.pk.push({t:'i',id:take(),x:400,y:300,pr:0,g:1},{t:'i',id:take(),x:560,y:300,pr:0,g:1});
+ if(r.t=='secret'){for(let i=0;i<3;i++)r.pk.push({t:pick(['c','c','b','k','a','h']),x:400+i*80,y:300,pr:0});if(Math.random()<.35)r.pk.push({t:'x',id:accessory(),x:480,y:230,pr:0})}
+ if(r.t=='shop'){r.pk.push({t:'i',id:take(),x:300,y:250,pr:12+fl*3},{t:'i',id:take(),x:420,y:250,pr:10+fl*3},{t:'x',id:accessory(),x:540,y:250,pr:14},{t:'a',x:660,y:250,pr:6},{t:'h',x:300,y:360,pr:4},{t:'b',x:420,y:360,pr:5},{t:'k',x:540,y:360,pr:5})}}
+
+function take(){if(!pool.length)pool=IT.slice(0,24).map((_,i)=>i);return pool.splice(ri(0,pool.length-1),1)[0]}
+
+function goRoom(r,d){P.inv=Math.max(P.inv,.7);room=r;if(!r.init)initRoom(r);r.vis=1;en=r.en;pk=r.pk;bul=[];bm=[];clearHz();
+ if(d){P.x=d[0]==1?L+40:d[0]==-1?RT-40:480;P.y=d[1]==1?U+40:d[1]==-1?BT-40:300}else{P.x=480;P.y=300}}
