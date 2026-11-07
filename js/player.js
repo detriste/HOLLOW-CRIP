@@ -161,7 +161,7 @@ function ability(){
    ARTILHEIRO
    ========================================================= */
 
-const GUN_N=14,GUN_T=1.2;
+const GUN_N=16.5,GUN_T=1.2;
 
 const gunAng=i=>i*6.283/GUN_N+(P.gr||0);
 
