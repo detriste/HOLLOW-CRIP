@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cripta do Vazio</title>
+<link rel="stylesheet" href="css/style.css">
+</head><body><canvas id="c" width="960" height="600"></canvas>
+<script>/* Diagnóstico: se algum arquivo faltar ou der erro, a mensagem aparece na tela em vez de ficar tudo preto */
+addEventListener('error',function(e){var t=e.target&&e.target.getAttribute&&e.target.getAttribute('src')?'Arquivo não encontrado: '+e.target.getAttribute('src'):e.message+' ('+String(e.filename||'').split('/').pop()+':'+e.lineno+')';
+var d=document.getElementById('erro');if(!d){d=document.createElement('pre');d.id='erro';d.style.cssText='position:fixed;left:8px;top:8px;right:8px;margin:0;padding:10px;background:#300;color:#fdd;font:13px monospace;white-space:pre-wrap;z-index:9';document.body.appendChild(d)}d.textContent+=t+'\n'},true);</script>
+<script src="js/01-config.js"></script>
+<script src="js/data/tabelas.js"></script>
+<script src="js/data/itens.js"></script>
+<script src="js/data/herois.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/gfx/utils.js"></script>
+<script src="js/gfx/icones.js"></script>
+<script src="js/gfx/sprites.js"></script>
+<script src="js/entities/inimigos.js"></script>
+<script src="js/world/perigos.js"></script>
+<script src="js/world/andar.js"></script>
+<script src="js/player.js"></script>
+<script src="js/combat.js"></script>
+<script src="js/ui/selecao.js"></script>
+<script src="js/ui/inventario.js"></script>
+<script src="js/ui/hud.js"></script>
+<script src="js/ui/configuracoes.js"></script>
+<script src="js/input.js"></script>
+<script src="js/game/fluxo.js"></script>
+<script src="js/game/update.js"></script>
+<script src="js/game/render.js"></script>
+<script src="js/main.js"></script>
+</body></html>
