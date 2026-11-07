@@ -1,5 +1,5 @@
 /* Tabelas de inimigos/chefes, versão elite e criação de inimigos */
-const SH={brute:[6,.2],wraith:[3,3],mage:[5,.8],sniper:[3,0],healer:[6,.3],sapper:[8,-.6],bat:[3,5]},BN=[['Ladrão Fantasma','#e8ecf4']],BP=[[0,1,2,3,4,7,9],[3,4,0,3,8,10],[2,1,0,2,6,7,9],[5,3,1,5,4,8,10],[6,6,0,3,5,9,10],[0]];
+const SH={brute:[6,.2],wraith:[3,3],mage:[5,.8],sniper:[3,0],healer:[6,.3],sapper:[8,-.6],bat:[3,5]},BN=[['Colosso Prisma','#a65a3a'],['Hidra Sombria','#6a9a5a'],['Rei Carmesim','#a8332f'],['Arauto do Vazio','#7a6a9a'],['Olho Eterno','#d4a93a'],['Ladrão Fantasma','#e8ecf4']],BP=[[0,1,2,3,4,7,9],[3,4,0,3,8,10],[2,1,0,2,6,7,9],[5,3,1,5,4,8,10],[6,6,0,3,5,9,10],[0]];
 
 function elite(m){m.el=1;m.hp=m.mhp=m.hp*2.8;m.r*=1.35;m.sp*=1.15}
 
