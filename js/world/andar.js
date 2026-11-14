@@ -291,13 +291,15 @@ function initRoom(r){
 
     // Lista de inimigos disponíveis por andar.
     const pl = [
-      ['drone','turret','blob','bat','sapper'],
+      ['drone','turret','blob','bat','sapper','seal','rep'],
 
       ['charger','spin','sniper','healer','turret',
-       'blob','sapper','brute','bat'],
+       'blob','sapper','brute','bat',
+       'seal','bomber','frost','rep'],
 
       ['mage','sniper','charger','spin','healer',
-       'wraith','wraith','brute','turret']
+       'wraith','wraith','brute','turret',
+       'seal','bomber','frost','frost','rep']
     ][fl-1];
 
     const n = ri(2,3)+fl+(fl>1?1:0);

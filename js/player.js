@@ -8,6 +8,7 @@ function newP(){
     x:480,y:300,vx:0,vy:0,r:13,
     hp:CH[sel].hp,max:CH[sel].hp,
     coins:0,bombs:1,keys:0,cd:0,inv:0,
+    weak:0,chill:0,
 
     dash:0,dcd:0,
 
@@ -59,6 +60,13 @@ function newP(){
 
 function ability(){
   if(P.ac>0)return;
+
+  // Enfraquecido (círculo mágico): habilidade bloqueada.
+  if(P.weak>0){
+    ban={t:1.2,s:'Enfraquecido — habilidade bloqueada'};
+    sfx(100,.15,.05,'square');
+    return;
+  }
 
   const k=P.ch.k;
   P.ac=P.ch.cd*P.s.acd;

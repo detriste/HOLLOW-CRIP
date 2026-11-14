@@ -13,6 +13,7 @@ js/
   audio.js            efeitos sonoros
   gfx/                utils.js (polígonos, texto) · icones.js · sprites.js
   entities/inimigos.js
+  entities/novos.js   inimigos novos: Bruxo do Selo, Bombardeiro, Sopro Glacial, Reflexo
   world/              perigos.js (perigos dos chefes) · andar.js (geração e salas)
   player.js           jogador e habilidade especial
   combat.js           bombas, tiros, dano, mortes, partículas

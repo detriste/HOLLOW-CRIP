@@ -25,7 +25,7 @@ function ibomb(b){const k=b.ib,rad=k==1?150:k==2?120:100,x=b.x,y=b.y;boom(x,y,ra
 function placeBomb(){if(P.s.ibomb){if(P.bcd>0)return;P.bcd=.9;bm.push({x:P.x,y:P.y,t:1,ib:P.ch.k});return}if(P.bombs>0){if(!(P.acc==4&&Math.random()<.35))P.bombs--;bm.push({x:P.x,y:P.y,t:1.4})}}
 
 function boom(x,y,rad,dmg,rocks,ns){shake=rocks?18:6;parts(x,y,'#d9923f',rocks?40:14,rocks?400:220);sfx(80,.3,.08,'sawtooth');
- for(const e of en)if(hy(e.x-x,e.y-y)<rad+e.r)hurt(e,dmg);
+ for(const e of en)if(hy(e.x-x,e.y-y)<rad+e.r){hurt(e,dmg);if(rocks&&e.t=='rep'){e.hp=0;e.bk=1}}
  if(rocks){if(!ns&&hy(P.x-x,P.y-y)<rad)hit(2);room.rocks=room.rocks.filter(k=>hy(L+k.x*TS+30-x,U+k.y*TS+30-y)>rad+20);pk.forEach(q=>0);D4.forEach(([a,b])=>{const n=nb(room,a,b);if(n&&n.sec&&!n.rev&&hy(480+a*420-x,300+b*240-y)<rad+60){n.rev=1;ban={t:2.5,s:'Uma passagem secreta se abriu!'};sfx(500,.3,.05,'triangle')}})}}
 
 let AB=0;
@@ -36,11 +36,11 @@ function kill(e){kills++;cb++;ct=3;if(e.t=='boss'&&!e.sm){P.bk=(P.bk||0)+1;if(P.
  if(P.ch.k==1&&e.t!='mini'){P.sk=(P.sk||0)+1;if(P.sk>=10){if(Math.ceil(P.sl.length/2)<3){P.sl.push('a','a');P.sk=0;ban={t:2.5,s:'Coração azul conquistado!'};sfx(900,.2,.05,'triangle');parts(P.x,P.y,'#7fa6c4',16,200)}else P.sk=10}}P.ac=Math.max(0,P.ac-.7);hs=e.t=='boss'?.25:.04;shake+=e.t=='boss'?20:2;parts(e.x,e.y,e.c,e.t=='boss'?80:16,e.t=='boss'?500:250);sfx(200,.12,.05,'triangle');
  if(P.hp<P.max&&Math.random()<P.s.leech+(P.acc==6?.1:0))P.hp++;
  if(e.t=='sapper'){boom(e.x,e.y,70,0,false);if(hy(P.x-e.x,P.y-e.y)<75)hit(1);for(let i=0;i<8;i++)eb(e.x,e.y,i*.785,170,'#d08a3c')}if(e.t=='blob'){for(let i=0;i<2;i++)en.push(mk('mini',e.x+rnd(-15,15),e.y+rnd(-15,15)))}
- else if(e.t!='mini'&&e.t!='boss'){if(Math.random()<(e.el?.95:.5)*(P.acc==0?1.4:1)){const q=Math.random();pk.push({t:dropT(q),x:e.x,y:e.y,pr:0})}if(e.el&&Math.random()<.2)pk.push({t:'i',id:take(),x:e.x,y:e.y,pr:0})}}
+ else if(e.t!='mini'&&e.t!='boss'&&!(e.t=='rep'&&e.gen>0)){if(Math.random()<(e.el?.95:.5)*(P.acc==0?1.4:1)){const q=Math.random();pk.push({t:dropT(q),x:e.x,y:e.y,pr:0})}if(e.el&&Math.random()<.2)pk.push({t:'i',id:take(),x:e.x,y:e.y,pr:0})}}
 
 function eb(x,y,a,sp,c){sp*=1+.08*(fl-1);bul.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,r:6,h:1,l:4,c:c||'#d9623f'})}
 
 const ang=e=>Math.atan2(P.y-e.y,P.x-e.x);
 
 function shoot(dx,dy){const s=P.s,a0=Math.atan2(dy,dx);for(let i=0;i<s.multi;i++){const a=a0+(i-(s.multi-1)/2)*.17+(s.multi==1?rnd(-.02,.02):0);
- bul.push({x:P.x,y:P.y,vx:Math.cos(a)*s.shot+P.vx*.3,vy:Math.sin(a)*s.shot+P.vy*.3,d:s.dmg*(P.acc==1?1.2:1)*(1+Math.min(cb,10)*.03),r:5+Math.min(5,s.dmg*.35),l:s.range,pi:s.pierce+(P.ph>0?9:0),bo:s.bounce,ho:s.home,ex:s.expl,h:0,hs:[]})}P.vx-=Math.cos(a0)*18;P.vy-=Math.sin(a0)*18;sfx(520,.05,.025)}
+ bul.push({x:P.x,y:P.y,vx:Math.cos(a)*s.shot+P.vx*.3,vy:Math.sin(a)*s.shot+P.vy*.3,d:s.dmg*(P.acc==1?1.2:1)*(P.weak>0?.6:1)*(1+Math.min(cb,10)*.03),r:5+Math.min(5,s.dmg*.35),l:s.range,pi:s.pierce+(P.ph>0?9:0),bo:s.bounce,ho:s.home,ex:s.expl,h:0,hs:[]})}P.vx-=Math.cos(a0)*18;P.vy-=Math.sin(a0)*18;sfx(520,.05,.025)}

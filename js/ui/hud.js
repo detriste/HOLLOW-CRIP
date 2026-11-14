@@ -156,6 +156,8 @@ function drawHUD(){
     );
   }
 
+  novoHud();
+
 
   /* ----------------------------------------------------------
      RETRATO DO PERSONAGEM

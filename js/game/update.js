@@ -146,7 +146,7 @@ function update(dt){
   const tt=P.dash>0||P.ph>0?'':terrAt(P.x,P.y);
 
   const mv=ix||iy;
-  const sp=s.spd*(P.ph>0?1.5:1)*
+  const sp=s.spd*(P.ph>0?1.5:1)*(P.chill>0?.5:1)*
     (s.ground?1:tt=='m'?.45:tt=='w'?.65:1);
 
   const fast=hy(P.vx,P.vy)>sp*1.3;
@@ -314,7 +314,7 @@ function update(dt){
 
     if(P.cd<=0){
       shoot(ax,ay);
-      P.cd=1/s.rate*(P.cur>0?1.6:1);
+      P.cd=1/s.rate*(P.cur>0?1.6:1)*(P.chill>0?1.35:1);
     }
   }else if(P.cd>0){
     P.cd-=dt;
@@ -922,6 +922,14 @@ function update(dt){
     // CHEFE
     // =====================================================
 
+    // =====================================================
+    // INIMIGOS NOVOS (Bruxo do Selo, Bombardeiro, Sopro Glacial, Reflexo)
+    // =====================================================
+
+    else if(e.t=='seal'||e.t=='bomber'||e.t=='frost'||e.t=='rep'){
+      novoAI(e,dt,a,d);
+    }
+
     else if(e.t=='boss'&&e.bt==5){
       thiefAI(e,dt,a,d);
     }
@@ -1144,7 +1152,11 @@ function update(dt){
   // =======================================================
 
   for(const e of en.slice())
-    if(e.hp<=0)kill(e);
+    if(e.hp<=0){
+      // Reflexos só morrem de verdade por explosão de bomba.
+      if(e.t=='rep'&&!e.bk)repSplit(e);
+      else kill(e);
+    }
 
   en=room.en= en.filter(e=>e.hp>0);
 
@@ -1386,6 +1398,7 @@ function update(dt){
   // =======================================================
 
   hzUp(dt);
+  novoUpdate(dt);
 
   for(const b of bm.slice()){
 

@@ -3,7 +3,7 @@ let hz=[],lvr=[];
 
 const BX=[11,12,13,14,15,16];
 
-function clearHz(){hz=[];for(const l of lvr){if(l.o)l.r.tm[l.k]=l.o;else delete l.r.tm[l.k]}lvr=[];if(P)P.cur=0;if(typeof room!='undefined'&&room&&room.rocks)room.rocks=room.rocks.filter(k=>!k.t)}
+function clearHz(){novoClear();hz=[];for(const l of lvr){if(l.o)l.r.tm[l.k]=l.o;else delete l.r.tm[l.k]}lvr=[];if(P)P.cur=0;if(typeof room!='undefined'&&room&&room.rocks)room.rocks=room.rocks.filter(k=>!k.t)}
 
 function lavaLine(ph){const hz0=Math.random()<.5,pi=cl(Math.floor((P.x-L)/TS),0,13),pj=cl(Math.floor((P.y-U)/TS),0,7),tl=[];
  const line=(h,idx)=>{const n=h?14:8,g=ri(1,n-3);for(let q=0;q<n;q++){if(q==g||q==g+1)continue;const i=h?q:idx,j=h?idx:q;if(!room.rocks.some(o=>o.x==i&&o.y==j))tl.push([i,j])}};

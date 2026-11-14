@@ -405,6 +405,7 @@ function draw(){
   // ----------------------------------------------------------
 
   hzDraw();
+  novoDraw();
 
   if(room.tot){
 
@@ -739,6 +740,9 @@ function draw(){
       face(e,c);
     }
 
+    // Detalhes dos inimigos novos.
+    novoEnemyFx(e);
+
     // --------------------------------------------------------
     // BARRA DE VIDA DOS INIMIGOS
     // --------------------------------------------------------
@@ -846,6 +850,9 @@ function draw(){
 
       X.setLineDash([]);
     }
+
+    // Efeitos de enfraquecido e gelo.
+    novoPlayerFx();
 
     X.restore();
   }
